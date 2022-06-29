@@ -19,7 +19,7 @@ function App() {
   }
 
 	useEffect(() => {
-		fetch("https://backend-phase-2-project.herokuapp.com/trivia")
+		fetch("https://phase-2-project-backend.herokuapp.com/trivia")
 			.then((r) => r.json())
 			.then((d) => setQuestions(d))
 	}, [])
