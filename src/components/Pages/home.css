@@ -1,0 +1,25 @@
+.container {
+    margin-top: 50px;
+}
+
+.card{
+    max-width: 800px;
+}
+
+.btn-primary{
+    padding: 8px 24px;
+    align-self: center;
+    margin: 20px;
+}
+
+.line{
+    border-top: 1px solid grey
+}
+
+.select-answer{
+    margin: 0 0 20px;
+}
+
+.answer{
+    margin:10px 0px 20px 20px;;
+}
