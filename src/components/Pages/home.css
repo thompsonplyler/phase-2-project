@@ -6,6 +6,15 @@
     max-width: 800px;
 }
 
+.title{
+    margin-top: 50px;
+    display: flex;
+}
+
+.card-title{
+    margin-right: 15px;
+}
+
 .btn-primary{
     padding: 8px 24px;
     align-self: center;

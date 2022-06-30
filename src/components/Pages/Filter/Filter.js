@@ -1,14 +1,15 @@
 import React from "react"
 
-function Filter() {
+function Filter({ changeCategory }) {
 	return (
 		<div className="container">
 			<h5>Filter Questions</h5>
 			<select
 				className="g-col-6 g-col-md-4 form-select-sm"
 				aria-label="Default select example"
+                onChange={changeCategory}
 			>
-				<option >Category</option>
+				<option value="all">Category</option>
 				<option value="general">General</option>
 				<option value="animals">Animals</option>
 				<option value="celebrities">Celebrities</option>
@@ -32,7 +33,7 @@ function Filter() {
 				className="g-col-6 g-col-md-4 form-select-sm"
 				aria-label="Default select example"
 			>
-				<option >Difficulty</option>
+				<option value="all">Difficulty</option>
 				<option value="easy">Easy</option>
 				<option value="medium">Medium</option>
 				<option value="hard">Hard</option>

@@ -5,23 +5,32 @@ import Home from "./Pages/Home"
 import AddAJoke from "./Pages/AddAJoke"
 
 function App() {
-	const [questions, setQuestions] = useState({})
+	//useState: initial FETCH from db.json's entire data
+	const [questions, setQuestions] = useState([])
+	//useState: random trivia pulled from questions useState
 	const [trivia, setTrivia] = useState([])
+	//answer options pulled from trivia useState
 	const [answerOptions, setAnswerOptions] = useState([])
 	console.log("random trivia: ", trivia)
-	const randomTrivia = questions[Math.floor(Math.random() * questions.length)]
-	const options = []
-  options.push(trivia.correct_answer)
-  for (const a of Object.entries(trivia)) {
-    if (a[0] === "incorrect_answers") {
-      options.push(...a[1])
-    }
-  }
+	console.log("answerOptions: ", answerOptions)
 
+	//======================================================================================
 	useEffect(() => {
 		fetch("https://phase-2-project-backend.herokuapp.com/trivia")
 			.then((r) => r.json())
-			.then((d) => setQuestions(d))
+			.then((d) => {
+				const randomTrivia = d[Math.floor(Math.random() * d.length)]
+				setTrivia(randomTrivia)
+				const options = []
+				options.push(randomTrivia.correct_answer)
+				for (const a of Object.entries(randomTrivia)) {
+					if (a[0] === "incorrect_answers") {
+						options.push(...a[1])
+					}
+				}
+				setAnswerOptions(shuffleArray(options))
+				setQuestions(d)
+			})
 	}, [])
 
 	//"The Fisher-Yates algorithm" - Shuffling elements in array. Copied from the web
@@ -35,15 +44,26 @@ function App() {
 		return array
 	}
 
-  const shuffled = shuffleArray(options)
-
+	//======================================================================================
 	function onClickButton() {
+		const randomTrivia =
+			questions[Math.floor(Math.random() * questions.length)]
 		setTrivia(randomTrivia)
-		setAnswerOptions(shuffled)
+    
+    const options = []
+    options.push(randomTrivia.correct_answer)
+    for (const a of Object.entries(randomTrivia)) {
+      if (a[0] === "incorrect_answers") {
+        options.push(...a[1])
+      }
+    }
+    
+    setAnswerOptions(shuffleArray(options))
 	}
-  console.log("options ", options)
-  console.log("shuffled ", shuffled)
-  console.log("options on click: ", answerOptions)
+
+  function changeCategory(e){
+    console.log("category ", e.target.value)
+  }
 
 	return (
 		<div className="App position-relative">
@@ -57,6 +77,7 @@ function App() {
 							onClickButton={onClickButton}
 							trivia={trivia}
 							answerOptions={answerOptions}
+              changeCategory={changeCategory}
 						/>
 					}
 				/>
