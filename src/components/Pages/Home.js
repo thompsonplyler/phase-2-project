@@ -4,10 +4,19 @@ import Filter from "./Filter/Filter"
 import Button from "react-bootstrap/Button"
 // import { Card } from "react-bootstrap"
 
-function Home({ onClickButton, trivia, answerOptions, changeCategory }) {
+function Home({
+	onClickButton,
+	trivia,
+	answerOptions,
+	changeCategory,
+	changeDifficulty,
+}) {
 	return (
 		<div>
-			<Filter changeCategory={changeCategory} />
+			<Filter
+				changeCategory={changeCategory}
+				changeDifficulty={changeDifficulty}
+			/>
 			<div className="container">
 				<div className="card">
 					<h1 className="card-header display-3">Question</h1>
@@ -29,34 +38,16 @@ function Home({ onClickButton, trivia, answerOptions, changeCategory }) {
 						<div className="row row-cols-1 row-cols-md-1">
 							<div className="col">
 								<h5>Select Answer</h5>
-								<Button
-									variant="info"
-									size="lg"
-									className="answer"
-								>
-									{answerOptions[0]}
-								</Button>{" "}
-								<Button
-									variant="info"
-									size="lg"
-									className="answer"
-								>
-									{answerOptions[1]}
-								</Button>{" "}
-								<Button
-									variant="info"
-									size="lg"
-									className="answer"
-								>
-									{answerOptions[2]}
-								</Button>{" "}
-								<Button
-									variant="info"
-									size="lg"
-									className="answer"
-								>
-									{answerOptions[3]}
-								</Button>{" "}
+								{answerOptions.map((answer) => (
+									<Button
+										variant="info"
+										size="lg"
+										className="answer"
+                                        key={answer.id}
+									>
+										{answer}
+									</Button>
+								))}
 							</div>
 						</div>
 					</div>

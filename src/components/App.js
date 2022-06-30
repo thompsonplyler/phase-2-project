@@ -2,25 +2,47 @@ import React, { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import Navbar from "./Navbar/Navbar"
 import Home from "./Pages/Home"
-import AddAJoke from "./Pages/AddAJoke"
+import AddAQuestion from "./Pages/Form/AddAQuestion"
 
 function App() {
 	//useState: initial FETCH from db.json's entire data
 	const [questions, setQuestions] = useState([])
 	//useState: random trivia pulled from questions useState
 	const [trivia, setTrivia] = useState([])
+	console.log("random trivia: ", trivia)
 	//answer options pulled from trivia useState
 	const [answerOptions, setAnswerOptions] = useState([])
-	console.log("random trivia: ", trivia)
-	console.log("answerOptions: ", answerOptions)
-
+	// console.log("answerOptions: ", answerOptions)
+	const [filterCategory, setFilterCategory] = useState("all")
+	// console.log("filterCat: ", filterCategory)
+	const [qDifficulty, setQDifficulty] = useState("all")
 	//======================================================================================
 	useEffect(() => {
 		fetch("https://phase-2-project-backend.herokuapp.com/trivia")
 			.then((r) => r.json())
-			.then((d) => {
-				const randomTrivia = d[Math.floor(Math.random() * d.length)]
+			.then((data) => {
+        console.log("filterCategoryUseEffect: ", filterCategory)
+				const filterCat = data.filter((question) => {
+					if (filterCategory === "all") {
+						return question
+					} else {
+						return question.category === filterCategory
+					}
+				})
+
+        const filterDiff = filterCat.filter((question) => {
+          if (qDifficulty === "all") {
+            return question
+          } else {
+            return question.difficulty === qDifficulty
+          }
+        })
+
+				const randomTrivia =
+        filterDiff[Math.floor(Math.random() * filterDiff.length)]
 				setTrivia(randomTrivia)
+
+
 				const options = []
 				options.push(randomTrivia.correct_answer)
 				for (const a of Object.entries(randomTrivia)) {
@@ -29,9 +51,9 @@ function App() {
 					}
 				}
 				setAnswerOptions(shuffleArray(options))
-				setQuestions(d)
+				setQuestions(filterDiff)
 			})
-	}, [])
+	}, [filterCategory, qDifficulty])
 
 	//"The Fisher-Yates algorithm" - Shuffling elements in array. Copied from the web
 	const shuffleArray = (array) => {
@@ -44,25 +66,27 @@ function App() {
 		return array
 	}
 
-	//======================================================================================
+	// On click New Question ===============================================================
 	function onClickButton() {
 		const randomTrivia =
 			questions[Math.floor(Math.random() * questions.length)]
 		setTrivia(randomTrivia)
-    
-    const options = []
-    options.push(randomTrivia.correct_answer)
-    for (const a of Object.entries(randomTrivia)) {
-      if (a[0] === "incorrect_answers") {
-        options.push(...a[1])
-      }
-    }
-    
-    setAnswerOptions(shuffleArray(options))
+
+		const options = []
+		options.push(randomTrivia.correct_answer)
+		for (const a of Object.entries(randomTrivia)) {
+			if (a[0] === "incorrect_answers") {
+				options.push(...a[1])
+			}}
+		setAnswerOptions(shuffleArray(options))
 	}
 
-  function changeCategory(e){
-    console.log("category ", e.target.value)
+	function changeCategory(e) {
+		setFilterCategory(e.target.value)
+	}
+
+  function changeDifficulty(e) {
+    setQDifficulty(e.target.value)
   }
 
 	return (
@@ -70,18 +94,16 @@ function App() {
 			<Navbar color="black" title="Random Trivia Questions" />
 			<Routes>
 				<Route
-					exact
-					path="/"
-					element={
+					exact path="/" element={
 						<Home
 							onClickButton={onClickButton}
 							trivia={trivia}
 							answerOptions={answerOptions}
-              changeCategory={changeCategory}
+							changeCategory={changeCategory}
+              changeDifficulty={changeDifficulty}
 						/>
-					}
-				/>
-				<Route exact path="/add-a-joke" element={<AddAJoke />} />
+					} />
+				<Route exact path="/add-a-question" element={<AddAQuestion />} />
 			</Routes>
 		</div>
 	)

@@ -1,6 +1,6 @@
 import React from "react"
 
-function Filter({ changeCategory }) {
+function Filter({ changeCategory, changeDifficulty }) {
 	return (
 		<div className="container">
 			<h5>Filter Questions</h5>
@@ -10,28 +10,29 @@ function Filter({ changeCategory }) {
                 onChange={changeCategory}
 			>
 				<option value="all">Category</option>
-				<option value="general">General</option>
-				<option value="animals">Animals</option>
-				<option value="celebrities">Celebrities</option>
-				<option value="cartoon">
-					Entertainment: Cartoon & Animation
+				<option value="General Knowledge">General Knowledge</option>
+				<option value="Animals">Animals</option>
+				<option value="Celebrities">Celebrities</option>
+				<option value="Entertainment: Cartoon & Animations">
+					Entertainment: Cartoon & Animations
 				</option>
-				<option value="comics">Entertainment: Comics</option>
-				<option value="film">Entertainment: Film</option>
-				<option value="anime">
+				<option value="Entertainment: Comics">Entertainment: Comics</option>
+				<option value="Entertainment: Film">Entertainment: Film</option>
+				<option value="Entertainment: Japanese Anime & Manga">
 					Entertainment: Japanese Anime & Manga
 				</option>
-				<option value="music">Entertainment: Music</option>
-				<option value="television">Entertainment: Television</option>
-				<option value="games">Entertainment: Video Games</option>
-				<option value="history">History</option>
-				<option value="science">Science & Nature</option>
-				<option value="computers">Science & Computers</option>
-				<option value="sports">Sports</option>
+				<option value="Entertainment: Music">Entertainment: Music</option>
+				<option value="Entertainment: Television">Entertainment: Television</option>
+				<option value="Entertainment: Video Games">Entertainment: Video Games</option>
+				<option value="History">History</option>
+				<option value="Science: Computers">Science: Computers</option>
+				<option value="Science & Nature">Science & Nature</option>
+				<option value="Sports">Sports</option>
 			</select>
 			<select
 				className="g-col-6 g-col-md-4 form-select-sm"
 				aria-label="Default select example"
+                onChange={changeDifficulty}
 			>
 				<option value="all">Difficulty</option>
 				<option value="easy">Easy</option>
