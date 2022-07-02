@@ -58,7 +58,6 @@ function Wall() {
 			>
 				<div className="col-md-6">
 					<label
-						for="formGroupExampleInput"
 						className="form-label col-md-4"
 					>
 						Name
@@ -73,7 +72,7 @@ function Wall() {
 					/>
 				</div>
 				<div className="col-md-8">
-					<label for="formGroupExampleInput2" className="form-label">
+					<label className="form-label">
 						Message
 					</label>
 					<textarea

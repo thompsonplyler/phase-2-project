@@ -3,7 +3,7 @@ import React from "react"
 function Messages({ messages }) {
 	return (
 		<div className="messages col-sm-8 g-4">
-      <div class="col">
+      <div className="col">
 			{messages.map((data) => (
 				<div className="card" key={data.id}>
 					<div className="card-body">
