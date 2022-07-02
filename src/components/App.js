@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import Navbar from "./Navbar/Navbar"
-import Home from "./Pages/Home"
-import AddAQuestion from "./Pages/Form/AddAQuestion"
+import Home from "./Pages/Home/Home"
+import AddAQuestion from "./Pages/AddAQuestion/AddAQuestion"
+import Wall from "./Pages/Wall/Wall"
 
 function App() {
 	//useState: initial FETCH from db.json's entire data
@@ -78,15 +79,22 @@ function App() {
 			if (a[0] === "incorrect_answers") {
 				options.push(...a[1])
 			}}
+    document.getElementById("liveAlertPlaceholder").textContent = ""
 		setAnswerOptions(shuffleArray(options))
 	}
 
 	function changeCategory(e) {
+    document.getElementById("liveAlertPlaceholder").textContent = ""
 		setFilterCategory(e.target.value)
 	}
 
   function changeDifficulty(e) {
+    document.getElementById("liveAlertPlaceholder").textContent = ""
     setQDifficulty(e.target.value)
+  }
+
+  function handleNewQuestion(newQuestion){
+    setQuestions([...questions, newQuestion])
   }
 
 	return (
@@ -103,7 +111,8 @@ function App() {
               changeDifficulty={changeDifficulty}
 						/>
 					} />
-				<Route exact path="/add-a-question" element={<AddAQuestion />} />
+				<Route exact path="/add-a-question" element={<AddAQuestion onAddAQuestion={handleNewQuestion} />} />
+        <Route exact path="/wall" element={<Wall />} />
 			</Routes>
 		</div>
 	)

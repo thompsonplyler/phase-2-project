@@ -1,3 +1,7 @@
+# My Trivia App
+
+I'm using the heroku backend AND a db.json in json-server-template > db to be ran as well 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

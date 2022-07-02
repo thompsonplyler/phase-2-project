@@ -1,0 +1,12 @@
+.filter{
+    max-width: 800px;
+}
+
+#category, #difficulty{
+    margin: 0 10px 0;
+    padding: 0;
+}
+
+.h3{
+    
+}

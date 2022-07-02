@@ -1,11 +1,11 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
 
-function Navbar({ title }) {
+function Navbar({ title, exact }) {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div className="container-fluid">
-				<NavLink to="/" className="navbar-brand" href="#">
+				<NavLink exact={exact} to="/" className="navbar-brand" href="#">
 					{title}
 				</NavLink>
 				<button
@@ -23,7 +23,7 @@ function Navbar({ title }) {
 					<div className="navbar-nav">
 						<NavLink
 							to="/"
-							exact
+							exact={exact}
 							className="nav-link active"
 							aria-current="page"
 							href="#"
@@ -34,12 +34,23 @@ function Navbar({ title }) {
 					<div className="navbar-nav">
 						<NavLink
 							to="/add-a-question"
-							exact
+							exact={exact}
 							className="nav-link active"
 							aria-current="page"
 							href="#"
 						>
 							Add A Question
+						</NavLink>
+					</div>
+					<div className="navbar-nav">
+						<NavLink
+							to="/wall"
+							exact={exact}
+							className="nav-link active"
+							aria-current="page"
+							href="#"
+						>
+							Message Wall
 						</NavLink>
 					</div>
 				</div>

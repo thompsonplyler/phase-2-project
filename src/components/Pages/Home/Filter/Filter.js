@@ -1,11 +1,14 @@
 import React from "react"
+import "./Filter.css"
 
 function Filter({ changeCategory, changeDifficulty }) {
 	return (
-		<div className="container">
-			<h5>Filter Questions</h5>
+		<div className="filter container">
+            <div className="col-10 mx-auto">
+			<label className="h4">Filter Questions</label>
 			<select
-				className="g-col-6 g-col-md-4 form-select-sm"
+			 	id="category"
+				className="col-6 "
 				aria-label="Default select example"
                 onChange={changeCategory}
 			>
@@ -30,7 +33,8 @@ function Filter({ changeCategory, changeDifficulty }) {
 				<option value="Sports">Sports</option>
 			</select>
 			<select
-				className="g-col-6 g-col-md-4 form-select-sm"
+                id="difficulty"
+				className="col-2"
 				aria-label="Default select example"
                 onChange={changeDifficulty}
 			>
@@ -39,6 +43,7 @@ function Filter({ changeCategory, changeDifficulty }) {
 				<option value="medium">Medium</option>
 				<option value="hard">Hard</option>
 			</select>
+            </div>
 		</div>
 	)
 }
